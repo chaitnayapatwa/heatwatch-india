@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Digital Heatwave Risk Mapping for Indian Cities - an interactive academic project dashboard.">
+  <title>HeatWatch India | Digital Heatwave Risk Mapping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="HeatWatch India home">
+      <span class="brand-mark"><span></span><span></span><span></span></span>
+      <span>
+        <b>HeatWatch</b>
+        <small>INDIA • DIGITAL RISK MAP</small>
+      </span>
+    </a>
+
+    <nav class="nav">
+      <a href="#dashboard">Dashboard</a>
+      <a href="#cities">Cities</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">☼</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> ENVIRONMENTAL DIGITAL TECHNOLOGY PROJECT</div>
+        <h1>See the heat.<br><em>Understand the risk.</em></h1>
+        <p class="hero-text">
+          An interactive digital platform for visualising heatwave risk across Indian cities
+          using temperature, exposure, vulnerability and adaptive-capacity indicators.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#dashboard">Explore Risk Map <span>→</span></a>
+          <button class="btn btn-ghost" id="howBtn">How it works <span>?</span></button>
+        </div>
+        <div class="hero-meta">
+          <div><strong>24</strong><span>sample cities</span></div>
+          <div><strong>5</strong><span>risk factors</span></div>
+          <div><strong>01</strong><span>digital dashboard</span></div>
+        </div>
+      </div>
+
+      <div class="hero-orb">
+        <div class="orb-ring ring-1"></div>
+        <div class="orb-ring ring-2"></div>
+        <div class="orb-ring ring-3"></div>
+        <div class="orb-core">
+          <span class="core-temp">43°</span>
+          <span class="core-label">PEAK HEAT</span>
+        </div>
+        <div class="orbit-dot dot-a"></div>
+        <div class="orbit-dot dot-b"></div>
+        <div class="orbit-dot dot-c"></div>
+      </div>
+    </section>
+
+    <section class="dashboard-section section" id="dashboard">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">LIVE-STYLE DEMONSTRATION</div>
+          <h2>India Heat Risk Dashboard</h2>
+          <p>Use the controls to explore the illustrative city dataset.</p>
+        </div>
+        <div class="data-badge"><span></span> DEMO DATASET</div>
+      </div>
+
+      <div class="controls card">
+        <label class="control">
+          <span>Search city</span>
+          <input id="citySearch" type="search" placeholder="e.g. Delhi, Jaipur..." autocomplete="off">
+        </label>
+        <label class="control">
+          <span>Risk level</span>
+          <select id="riskFilter">
+            <option value="all">All levels</option>
+            <option value="extreme">Extreme</option>
+            <option value="high">High</option>
+            <option value="moderate">Moderate</option>
+            <option value="low">Low</option>
+          </select>
+        </label>
+        <label class="control">
+          <span>Indicator</span>
+          <select id="indicatorSelect">
+            <option value="risk">Overall risk</option>
+            <option value="temperature">Temperature</option>
+            <option value="exposure">Exposure</option>
+            <option value="vulnerability">Vulnerability</option>
+            <option value="adaptation">Adaptive capacity</option>
+          </select>
+        </label>
+        <button class="reset-btn" id="resetBtn">Reset filters ↺</button>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="map-card card">
+          <div class="map-head">
+            <div>
+              <h3>Digital Risk Map</h3>
+              <p>Click a city marker for detailed indicators.</p>
+            </div>
+            <div class="legend">
+              <span><i class="legend-dot extreme"></i>Extreme</span>
+              <span><i class="legend-dot high"></i>High</span>
+              <span><i class="legend-dot moderate"></i>Moderate</span>
+              <span><i class="legend-dot low"></i>Low</span>
+            </div>
+          </div>
+
+          <div class="map-stage" id="mapStage">
+            <div class="map-grid-lines"></div>
+            <svg class="india-shape" viewBox="0 0 500 610" aria-hidden="true">
+              <defs>
+                <linearGradient id="indiaFill" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#2c303a"/>
+                  <stop offset="100%" stop-color="#181a21"/>
+                </linearGradient>
+              </defs>
+              <path d="M197 26 L235 38 264 61 286 75 304 103 330 119 319 144 341 165
+                       328 190 345 212 334 237 350 259 337 282 324 302 315 333
+                       299 360 287 389 274 418 259 445 247 477 231 513 218 554
+                       201 585 186 561 174 532 159 507 149 479 137 456 124 427
+                       116 399 103 370 89 347 79 320 68 291 56 264 64 239 83 218
+                       99 197 89 176 106 157 120 139 113 119 134 106 150 88 157 65 180 57Z"
+                    fill="url(#indiaFill)" stroke="#484d5a" stroke-width="3"/>
+              <path d="M152 88 C205 145 274 192 324 258 M90 218 C170 236 244 242 334 237
+                       M78 320 C158 302 243 326 315 333 M116 399 C174 380 228 408 274 418"
+                    fill="none" stroke="#363a45" stroke-width="2" stroke-dasharray="5 8"/>
+            </svg>
+
+            <div class="map-label north">NORTH</div>
+            <div class="map-label south">SOUTH</div>
+            <div class="map-label west">WEST</div>
+            <div class="map-label east">EAST</div>
+            <div id="cityMarkers"></div>
+            <div class="map-scale"><span></span><b>Indicative risk intensity</b></div>
+          </div>
+        </div>
+
+        <aside class="detail-card card" id="detailCard">
+          <div class="detail-top">
+            <div>
+              <span class="tiny-label">SELECTED CITY</span>
+              <h3 id="detailCity">Delhi</h3>
+              <p id="detailState">National Capital Territory</p>
+            </div>
+            <div class="risk-score" id="detailScore">86</div>
+          </div>
+
+          <div class="risk-pill high" id="detailPill">HIGH RISK</div>
+
+          <div class="metrics" id="metrics">
+            <div class="metric">
+              <div><span>Heat intensity</span><b id="mTemp">91</b></div>
+              <div class="bar"><i id="bTemp"></i></div>
+            </div>
+            <div class="metric">
+              <div><span>Population exposure</span><b id="mExposure">95</b></div>
+              <div class="bar"><i id="bExposure"></i></div>
+            </div>
+            <div class="metric">
+              <div><span>Social vulnerability</span><b id="mVulnerability">79</b></div>
+              <div class="bar"><i id="bVulnerability"></i></div>
+            </div>
+            <div class="metric">
+              <div><span>Adaptive capacity</span><b id="mAdaptation">58</b></div>
+              <div class="bar"><i id="bAdaptation"></i></div>
+            </div>
+          </div>
+
+          <div class="insight">
+            <span class="insight-icon">⌁</span>
+            <div>
+              <b>Digital insight</b>
+              <p id="detailInsight">High exposure and strong heat intensity make heat-health planning a priority.</p>
+            </div>
+          </div>
+
+          <button class="full-btn" id="detailsBtn">View city analysis →</button>
+        </aside>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card card"><span class="stat-icon">°C</span><div><small>Highest sample temperature</small><strong>45.2°C</strong><em>illustrative</em></div></div>
+        <div class="stat-card card"><span class="stat-icon">⌁</span><div><small>Extreme-risk cities</small><strong id="extremeCount">4</strong><em>in sample</em></div></div>
+        <div class="stat-card card"><span class="stat-icon">◉</span><div><small>Average risk index</small><strong id="avgRisk">72.8</strong><em>0–100 scale</em></div></div>
+        <div class="stat-card card"><span class="stat-icon">↗</span><div><small>Indicators combined</small><strong>4</strong><em>core dimensions</em></div></div>
+      </div>
+    </section>
+
+    <section class="cities-section section" id="cities">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">CITY COMPARISON</div>
+          <h2>Risk profile by city</h2>
+          <p>Sort and inspect the cities included in this demonstration.</p>
+        </div>
+        <button class="btn btn-small btn-ghost" id="sortBtn">Sort: Risk ↓</button>
+      </div>
+      <div class="city-table card">
+        <div class="table-head"><span>City</span><span>Risk index</span><span>Temperature</span><span>Exposure</span><span>Status</span></div>
+        <div id="cityRows"></div>
+      </div>
+    </section>
+
+    <section class="method-section section" id="methodology">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">HOW THE MAP WORKS</div>
+          <h2>From climate signal to risk score</h2>
+          <p>A transparent framework makes the digital map easier to explain in a CA presentation.</p>
+        </div>
+      </div>
+
+      <div class="method-grid">
+        <article class="method-card card">
+          <span class="step">01</span>
+          <div class="method-icon">🌡</div>
+          <h3>Heat intensity</h3>
+          <p>Temperature and heat-related indicators represent the physical climate hazard.</p>
+          <div class="weight">WEIGHT <b>35%</b></div>
+        </article>
+        <article class="method-card card">
+          <span class="step">02</span>
+          <div class="method-icon">◉</div>
+          <h3>Exposure</h3>
+          <p>Population and urban concentration indicate how many people may be exposed.</p>
+          <div class="weight">WEIGHT <b>25%</b></div>
+        </article>
+        <article class="method-card card">
+          <span class="step">03</span>
+          <div class="method-icon">⌁</div>
+          <h3>Vulnerability</h3>
+          <p>Social and built-environment conditions influence the potential impact of heat.</p>
+          <div class="weight">WEIGHT <b>20%</b></div>
+        </article>
+        <article class="method-card card">
+          <span class="step">04</span>
+          <div class="method-icon">↗</div>
+          <h3>Adaptive capacity</h3>
+          <p>Cooling access, planning and response capacity can reduce overall risk.</p>
+          <div class="weight">WEIGHT <b>20%</b></div>
+        </article>
+      </div>
+
+      <div class="formula card">
+        <div>
+          <span class="tiny-label">ILLUSTRATIVE COMPOSITE INDEX</span>
+          <h3>Risk = 0.35H + 0.25E + 0.20V + 0.20(100 − A)</h3>
+        </div>
+        <p>H = heat intensity, E = exposure, V = vulnerability, A = adaptive capacity. Values are normalised to 0–100 for this student-project demonstration.</p>
+      </div>
+    </section>
+
+    <section class="about-section section" id="about">
+      <div class="about-card">
+        <div>
+          <div class="eyebrow">ACADEMIC PROJECT</div>
+          <h2>Digital Heatwave Risk Mapping for Indian Cities</h2>
+          <p>
+            This interface is designed as a prototype for an environmental studies / digital technology
+            project. It demonstrates how a city-level risk map can combine multiple indicators into a
+            clear visual decision-support dashboard.
+          </p>
+        </div>
+        <div class="about-side">
+          <div class="about-tag">CA PROJECT</div>
+          <div class="about-tag">DATA VISUALISATION</div>
+          <div class="about-tag">CLIMATE RISK</div>
+          <div class="about-tag">INDIA</div>
+        </div>
+      </div>
+      <div class="source-note">
+        <b>Important:</b> The values in this front-end prototype are illustrative demo values, not an official heatwave warning.
+        For the final report, replace them with cited data from authoritative meteorological, census, satellite or government sources
+        and document the year, spatial scale and calculation method.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>HEATWATCH INDIA</span>
+    <span>Digital Heatwave Risk Mapping • Academic Prototype</span>
+    <span>Built with HTML • CSS • JavaScript</span>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal card">
+      <button class="modal-close" id="modalClose">×</button>
+      <div class="eyebrow">CITY ANALYSIS</div>
+      <h2 id="modalTitle">Delhi</h2>
+      <p id="modalText"></p>
+      <div class="modal-grid">
+        <div><span>Risk index</span><b id="modalRisk">86</b></div>
+        <div><span>Heat intensity</span><b id="modalTemp">91</b></div>
+        <div><span>Exposure</span><b id="modalExposure">95</b></div>
+        <div><span>Adaptive capacity</span><b id="modalAdaptation">58</b></div>
+      </div>
+      <div class="recommend-box">
+        <b>Suggested response themes</b>
+        <p>Heat-health alerts • shaded public spaces • drinking-water access • work-hour planning • cooling-centre preparedness</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
